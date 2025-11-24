@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		4D3BCAF62E6F39D500AE9870 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D3BCAF52E6F39D500AE9870 /* config.plist */; };
+		4DEBD9DE2ECB7E5900F3D7C8 /* testItems.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4DEBD9DD2ECB7E5900F3D7C8 /* testItems.plist */; };
 		5ECA97CE2E66E2F90025245E /* VSTT2 in Frameworks */ = {isa = PBXBuildFile; productRef = 5ECA97CD2E66E2F90025245E /* VSTT2 */; };
 		5ECA97D02E66E2F90025245E /* VSMap in Frameworks */ = {isa = PBXBuildFile; productRef = 5ECA97CF2E66E2F90025245E /* VSMap */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4D3BCAF52E6F39D500AE9870 /* config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		4DEBD9DD2ECB7E5900F3D7C8 /* testItems.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = testItems.plist; sourceTree = "<group>"; };
 		5ECA97962E66E2010025245E /* ios-test-application.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-test-application.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -61,6 +63,7 @@
 		5ECA978D2E66E2010025245E = {
 			isa = PBXGroup;
 			children = (
+				4DEBD9DD2ECB7E5900F3D7C8 /* testItems.plist */,
 				4D3BCAF52E6F39D500AE9870 /* config.plist */,
 				5ECA97982E66E2010025245E /* ios-test-application */,
 				5EC29C582E684A9500E09B4E /* Packages */,
@@ -154,6 +157,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DEBD9DE2ECB7E5900F3D7C8 /* testItems.plist in Resources */,
 				4D3BCAF62E6F39D500AE9870 /* config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

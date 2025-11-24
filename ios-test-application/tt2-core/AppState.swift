@@ -2,6 +2,8 @@
 // ios-test-application
 
 import Foundation
+import UIKit
+import VSFoundation
 import VSTT2
 import VSMap
 
@@ -50,5 +52,51 @@ class AppState {
 
     func setSelectedItem(_ selectedItem: TestItem?) {
         self._selectedItem = selectedItem
+    }
+
+    func startVisit(with item: Item?) {
+        guard (try? tt2.activeStore) != nil, !tt2.analytics.hasVisit else { return }
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+        let info = DeviceInformation(
+          id: UIDevice.current.name,
+          operatingSystem: UIDevice.current.systemName,
+          osVersion: UIDevice.current.systemVersion,
+          appVersion: "\(appVersion ?? "Unknown") (\(buildNumber ?? ""))",
+          deviceModel: UIDevice.current.modelName
+        )
+        tt2.analytics.startVisit(deviceInformation: info, tags: ["userId": "ios-test-app"]) { [weak self] (result) in
+            switch result {
+            case .success(_):
+                try? self?.tt2.analytics.startCollectingHeatMapData()
+            case .failure(let error):
+                print("Error starting visit", error)
+            }
+            if let item = item {
+                self?.startTrackingWayfinding(with: item)
+            }
+        }
+    }
+
+    func startTrackingWayfinding(with item: Item) {
+        guard tt2.analytics.hasVisit else { return }
+        if let position = item.itemPosition {
+            tt2.analytics.startTrackingWayfinding(itemPosition: position)
+        } else if let position = item.zonePosition {
+            tt2.analytics.startTrackingWayfinding(zonePosition: position)
+        }
+    }
+
+    func stopTrackingWayfinding(with item: Item) {
+        guard tt2.analytics.hasVisit else { return }
+        if let position = item.itemPosition {
+            tt2.analytics.stopTrackingWayfinding(itemPosition: position)
+        } else if let position = item.zonePosition {
+            tt2.analytics.stopTrackingWayfinding(zonePosition: position)
+        }
+    }
+
+    func getPositionBy(identifier: String, completion: @escaping (Result<Item, Error>) ->()) {
+        tt2.position.getBy(barcode: identifier, completion: completion)
     }
 }

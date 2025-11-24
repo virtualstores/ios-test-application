@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +11,7 @@
         <!--Start View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="StartViewController" customModule="tt2_wayfinding" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="StartViewController" customModule="ios_test_application" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,7 +22,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Init All Of TT2"/>
                                 <connections>
-                                    <action selector="initAllOfTT2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hLJ-GO-lWy"/>
+                                    <action selector="handleInitAllOfTT2ButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="538-lZ-hZj"/>
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="hFi-A6-FVR">
@@ -35,7 +35,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Proceed"/>
                                 <connections>
-                                    <action selector="onProceed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PEn-NZ-QGc"/>
+                                    <action selector="handleProceedButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XBr-jb-0Mi"/>
                                     <segue destination="8SH-po-4sg" kind="showDetail" id="thx-9q-eB0"/>
                                 </connections>
                             </button>
@@ -45,7 +45,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Init TT2 Map SDK"/>
                                 <connections>
-                                    <action selector="initTT2MapSDK:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WX3-Jd-2Cs"/>
+                                    <action selector="handleInitTT2MapSDKButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RFu-fh-24i"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1nK-FL-OB6">
@@ -54,7 +54,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Init TT2 SDK"/>
                                 <connections>
-                                    <action selector="initTT2SDK:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FSS-md-9L0"/>
+                                    <action selector="handleInitTT2SDKButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eeP-DT-Ldw"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rnt-VT-vr5">
@@ -63,7 +63,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Dispose TT2 Map SDK"/>
                                 <connections>
-                                    <action selector="disposeTT2MapSDK:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XiJ-0s-tfP"/>
+                                    <action selector="handleDisposeTT2MapSDKButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XSG-bZ-VOe"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tvg-hZ-FbW">
@@ -72,7 +72,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Dispose TT2 SDK"/>
                                 <connections>
-                                    <action selector="disposeTT2SDK:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ijA-la-6dI"/>
+                                    <action selector="handleDisposeTT2SDKButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TXn-6k-rry"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gtf-1L-1rx">
@@ -81,7 +81,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Dispose All Of TT2"/>
                                 <connections>
-                                    <action selector="disposeAllOfTT2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="irN-Tv-RrP"/>
+                                    <action selector="handleDisposeAllOfTT2ButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wlz-Ln-JaY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNW-VP-teK">
@@ -90,7 +90,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Init TT2 Client"/>
                                 <connections>
-                                    <action selector="initTT2Client:" destination="BYZ-38-t0r" eventType="touchUpInside" id="K0j-s7-RYC"/>
+                                    <action selector="handleInitTT2ClientButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iHH-Od-COW"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -110,7 +110,7 @@
         <!--Store View Controller-->
         <scene sceneID="TNR-C1-co1">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="8SH-po-4sg" customClass="StoreViewController" customModule="tt2_wayfinding" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="8SH-po-4sg" customClass="StoreViewController" customModule="ios_test_application" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aIg-o7-d9b">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -120,11 +120,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StoreTableCell" id="24Q-Vw-gZg" customClass="StoreTableCell" customModule="tt2_wayfinding" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="278" height="43.666667938232422"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StoreTableCell" id="24Q-Vw-gZg" customClass="StoreTableCell" customModule="ios_test_application" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="278" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="24Q-Vw-gZg" id="bSV-oq-7EG">
-                                            <rect key="frame" x="0.0" y="0.0" width="278" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="278" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label salkd j jlaskj d aslkdj   aslsalkj dd dj sl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tdY-nL-o0u">
@@ -147,11 +147,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ItemTableCell" id="cYY-g0-lAi" customClass="ItemTableCell" customModule="tt2_wayfinding" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="278" height="43.666667938232422"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ItemTableCell" id="cYY-g0-lAi" customClass="ItemTableCell" customModule="ios_test_application" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="278" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cYY-g0-lAi" id="Vnh-42-u8O">
-                                            <rect key="frame" x="0.0" y="0.0" width="278" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="278" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CjR-bD-ACP">
@@ -209,12 +209,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nyz-zi-PYu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1478.6259541984732" y="-27.464788732394368"/>
+            <point key="canvasLocation" x="937" y="-27"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="wDT-7s-32V">
             <objects>
-                <viewController storyboardIdentifier="MapViewController" modalPresentationStyle="fullScreen" id="oN6-bK-3IV" customClass="MapViewController" customModule="tt2_wayfinding" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" modalPresentationStyle="fullScreen" id="oN6-bK-3IV" customClass="MapViewController" customModule="ios_test_application" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EYz-Ut-Ggg">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -249,6 +249,15 @@
                                             <action selector="stopNavigation:" destination="oN6-bK-3IV" eventType="touchUpInside" id="1hM-Vs-utN"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLh-4G-EIU">
+                                        <rect key="frame" x="3" y="723" width="145" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Scan EAN Code"/>
+                                        <connections>
+                                            <action selector="scanEANCode:" destination="oN6-bK-3IV" eventType="touchUpInside" id="xt8-Bg-PAV"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -268,7 +277,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fha-ln-8Hc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2747.3282442748091" y="-27.464788732394368"/>
+            <point key="canvasLocation" x="1653" y="-27"/>
         </scene>
     </scenes>
     <resources>

@@ -5,13 +5,12 @@ import UIKit
 import VSMap
 import Combine
 import VSFoundation
+import VSTT2
 // Created by: CJ on 2025-09-02
 // Copyright (c) 2025
 
 class MapViewController: UIViewController, IdentifiableInstance {
-  private var tag: String {
-    "MapViewController:\(self.instanceId)"
-  }
+  private var tag: String { "MapViewController:\(instanceId)" }
   private var cancellable = Set<AnyCancellable>()
   private var mapController: BaseMapController?
 
@@ -23,7 +22,7 @@ class MapViewController: UIViewController, IdentifiableInstance {
 
     // create MapController
 
-    if let token = AppState.shared.tt2.activeFloor.mapBoxToken {
+    if let token = try? AppState.shared.tt2.activeFloor.mapBoxToken {
       mapController = BaseMapController(
         with: token,
         view: mapView,
@@ -60,56 +59,82 @@ class MapViewController: UIViewController, IdentifiableInstance {
       }.store(in: &cancellable)
   }
 
-  var itemPosition: ItemPosition?
+  var item: Item?
   private func addMarkOnMap(for testItem: TestItem) {
-    AppState.shared.tt2.position.getBy(barcode: testItem.barcode) { [weak self] result in
+    AppState.shared.getPositionBy(identifier: testItem.barcode) { [weak self] (result) in
       switch result {
       case .success(let item):
-        guard let itemPosition = item.itemPosition else { return }
-        self?.itemPosition = itemPosition
-        let id = item.externalId
-        let marker = BaseMapMark(
-          id: id,
-          itemPosition: itemPosition,
-          clusterable: false,
-          defaultVisibility: true,
-          focused: false,
-          type: .imageUrl(testItem.imageUrl)
-        )
+        var marker: MapMark?
+        if let position = item.itemPosition {
+          marker = self?.createMarker(with: position, imageUrl: testItem.imageUrl)
+        }
+        if let position = item.zonePosition {
+          marker = self?.createMarker(with: position, imageUrl: testItem.imageUrl)
+          self?.mapController?.zone.select(zoneId: position.id)
+          self?.mapController?.zone.show(zoneId: position.id)
+        }
 
+        guard let marker = marker else { return }
+        self?.item = item
         self?.mapController?.marker.add(marker: marker)
         self?.mapController?.path.set(goals: [marker.asGoal]) {}
-        if AppState.shared.tt2.analytics.hasVisit {
-          AppState.shared.tt2.analytics.startTrackingWayfinding(itemPosition: itemPosition)
-        }
-      case .failure(let error): // Handle error
+      case .failure(let error):
         print("\(self?.tag).createMarker error: \(error)")
       }
     }
   }
 
-  @IBAction func scanQrCode(_ sender: UIButton) {
-    AppState.shared.tt2.navigation.syncPosition(identifier: "start_test_3", type: .normal(syncRotation: false), reportScanEvent: true) { [weak self] result in
+  /// Creating a BaseMapMark with a ItemPosition
+  func createMarker(with position: ItemPosition, imageUrl: String) -> MapMark {
+    BaseMapMark(
+      id: position.identifier,
+      itemPosition: position,
+      clusterable: false,
+      defaultVisibility: true,
+      focused: false,
+      type: .imageUrl(imageUrl)
+    )
+  }
+
+  /// Creating a BaseMapMark with a ZonePosition
+  func createMarker(with position: ZonePosition, imageUrl: String) -> MapMark {
+    BaseMapMark(
+      id: position.id,
+      zonePosition: position,
+      clusterable: false,
+      defaultVisibility: true,
+      focused: false,
+      type: .imageUrl(imageUrl)
+    )
+  }
+
+  func syncPosition(identifier: String) {
+    AppState.shared.tt2.navigation.syncPosition(identifier: identifier, type: .compass(forceSync: false), reportScanEvent: true) { [weak self] result in
       switch result {
       case .success(let success):
         print("\(self?.tag).syncPosition success: \(success)")
-        if !AppState.shared.tt2.analytics.hasVisit {
-          AppState.shared.tt2.analytics.startVisit(deviceInformation: .init(id: "", operatingSystem: "", osVersion: "", appVersion: "", deviceModel: ""), tags: ["userId": "ios-test-app"]) { (result) in
-            switch result {
-            case .success(_):
-              try? AppState.shared.tt2.analytics.startCollectingHeatMapData()
-              if let itemPosition = self?.itemPosition {
-                AppState.shared.tt2.analytics.startTrackingWayfinding(itemPosition: itemPosition)
-              }
-            case .failure(_):
-              break
-            }
-          }
-        }
+        AppState.shared.startVisit(with: self?.item)
       case .failure(let error):
         print("\(self?.tag).syncPosition error: \(error)")
       }
     }
+  }
+
+  @IBAction func scanQrCode(_ sender: UIButton) {
+    let alert = UIAlertController(title: "Choose a start scan location", message: nil, preferredStyle: .actionSheet)
+    try? AppState.shared.tt2.activeFloor.scanLocations?
+      .filter { $0.type == .start }
+      .forEach { (code) in
+        alert.addAction(.init(title: code.code, style: .default, handler: { [weak self] (_) in
+          self?.syncPosition(identifier: code.code)
+        }))
+      }
+    alert.addAction(.init(title: "Cancel", style: .cancel))
+    present(alert, animated: true)
+  }
+
+  @IBAction func scanEANCode(_ sender: UIButton) {
+    syncPosition(identifier: "Enter random barcode here to test start navigation with EAN")
   }
 
   @IBAction func stopNavigation(_ sender: UIButton) {
@@ -124,9 +149,9 @@ class MapViewController: UIViewController, IdentifiableInstance {
     mapController?.dispose()
     AppState.shared.tt2.set(map: nil)
     mapController = nil
-    if let itemPosition = itemPosition {
-      AppState.shared.tt2.analytics.stopTrackingWayfinding(itemPosition: itemPosition)
-      self.itemPosition = nil
+    if let item = item {
+      AppState.shared.stopTrackingWayfinding(with: item)
+      self.item = nil
     }
 
     dismiss(animated: true)
