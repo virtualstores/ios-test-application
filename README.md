@@ -13,12 +13,19 @@ config.plist
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>SERVER_URL</key>
-	<string>Your central server URL</string>
-	<key>API_KEY</key>
-	<string>Your API key</string>
-	<key>CLIENT_ID</key>
-	<integer>1</integer>
+	<key>CLIENT_0</key>
+	<dict>
+		<key>CENTRAL_SERVER_URL</key>
+		<string>Your central server</string>
+		<key>DATA_SERVER_URL</key>
+		<string>Your data server</string>
+		<key>USERNAME</key>
+		<string>Your username</string>
+		<key>PASSWORD</key>
+		<string>Your password</string>
+		<key>CLIENT_ID</key>
+		<integer>1</integer>
+	</dict>
 </dict>
 </plist>
 ```
